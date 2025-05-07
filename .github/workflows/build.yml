@@ -1,0 +1,34 @@
+name: build
+on:
+  push: 
+    branches:
+      - main
+  pull_request: 
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Testing Java Running
+        run: |
+          java -version
+          javac -version
+          mvn -v
+
+      - name: Build with Maven
+        working-directory:  ./backend
+        run: |
+          mvn clean install
+          mvn test
+
