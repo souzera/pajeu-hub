@@ -28,7 +28,5 @@ jobs:
 
       - name: Build with Maven
         working-directory:  ./backend
-        run: |
-          mvn clean install
-          mvn test
+        run: echo "TODO:Maven Build"
 

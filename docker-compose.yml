@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+    database:
+        image: postgres:14
+        container_name: postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: pajeuhub
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./postgres_data:/var/lib/postgresql/data
+
+    test_database:
+        image: oscarfonts/h2:latest
+        container_name: h2
+        ports:
+            - "8082:8082"
+        environment:
+            database: pajeuhub_test
+            username: sa
+            password: sa
+            H2_OPTIONS: "-tcp -tcpAllowOthers -web -webAllowOthers"
+        volumes:
+            - ./h2_data:/data
