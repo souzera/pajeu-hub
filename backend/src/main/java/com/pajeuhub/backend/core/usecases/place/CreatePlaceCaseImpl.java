@@ -1,12 +1,13 @@
-package com.pajeuhub.backend.core.usecases;
+package com.pajeuhub.backend.core.usecases.place;
 
 import com.pajeuhub.backend.core.entities.Place;
 
-public class FindPlaceCaseImpl implements FindPlaceCase {
+public class CreatePlaceCaseImpl implements CreatePlaceCase{
 
     @Override
-    public Place execute(String id) {
+    public Place execute(Place place) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'execute'");
     }
+    
 }

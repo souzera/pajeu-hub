@@ -3,7 +3,7 @@ package com.pajeuhub.backend.core.entities;
 import com.pajeuhub.backend.core.enums.PlaceType;
 
 public record Place(
-    String id,
+    Long id,
     String address,
     String city,
     String cep,

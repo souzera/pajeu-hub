@@ -1,4 +1,4 @@
-package com.pajeuhub.backend.core.usecases;
+package com.pajeuhub.backend.core.usecases.activity;
 
 import com.pajeuhub.backend.core.entities.Activity;
 

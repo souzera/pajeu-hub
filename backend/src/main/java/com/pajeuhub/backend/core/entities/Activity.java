@@ -3,7 +3,7 @@ package com.pajeuhub.backend.core.entities;
 import java.util.Date;
 
 public record Activity(
-    String id,
+    Long id,
     String info,
     Date date,
     Place place,

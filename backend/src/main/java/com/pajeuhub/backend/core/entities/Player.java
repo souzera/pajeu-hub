@@ -1,7 +1,8 @@
 package com.pajeuhub.backend.core.entities;
 
 public record Player(
-    String id,
+    Long id,
     String name,
-    String contact
+    String contact,
+    User user
 ) {}
