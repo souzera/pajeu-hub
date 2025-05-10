@@ -38,7 +38,7 @@ public class ActivityEntity {
 
     @ManyToMany
     @JoinTable(
-        name = "activity_members",
+        name = "hub_activity_members",
         joinColumns = @JoinColumn(name = "activity_id"),
         inverseJoinColumns = @JoinColumn(name = "player_id")
     )
