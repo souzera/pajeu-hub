@@ -1,3 +1,9 @@
 # PRIVATE FILE
 
 private/
+
+
+# VOLUMES DATA
+
+postgres_data/
+h2_data/
