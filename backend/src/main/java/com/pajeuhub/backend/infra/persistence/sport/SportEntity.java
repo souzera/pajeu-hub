@@ -1,4 +1,4 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.sport;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

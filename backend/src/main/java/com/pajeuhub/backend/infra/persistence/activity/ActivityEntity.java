@@ -1,7 +1,10 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.activity;
 
 import java.util.Date;
 
+import com.pajeuhub.backend.infra.persistence.place.PlaceEntity;
+import com.pajeuhub.backend.infra.persistence.player.PlayerEntity;
+import com.pajeuhub.backend.infra.persistence.sport.SportEntity;
 
 import lombok.Data;
 import lombok.AllArgsConstructor;

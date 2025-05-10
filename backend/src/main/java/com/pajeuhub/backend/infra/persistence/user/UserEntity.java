@@ -1,4 +1,4 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.user;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -10,12 +10,12 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "hub_player")
-public class PlayerEntity {
-    
+@Table(name = "auth_users")
+public class UserEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String contact;
+    private String login;
+    private String password;
 }

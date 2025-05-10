@@ -1,4 +1,4 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.place;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -22,5 +22,7 @@ public class PlaceEntity {
     private String city;
     private String cep;
     private boolean status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "kind")
     private PlaceType kind;
 }
