@@ -20,6 +20,9 @@ services:
         ports:
             - "8082:8082"
         environment:
+            database: pajeuhub_test
+            username: sa
+            password: sa
             H2_OPTIONS: "-tcp -tcpAllowOthers -web -webAllowOthers"
         volumes:
             - ./h2_data:/data
