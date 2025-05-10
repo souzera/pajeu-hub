@@ -2,19 +2,17 @@ package com.pajeuhub.backend.infra.persistence;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import jakarta.persistence.*;
 
 import com.pajeuhub.backend.core.enums.PlaceType;
 
-@Entity
-@Table(name = "hub_places")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Entity
+@Table(name = "hub_places")
 public class PlaceEntity {
     
     @Id

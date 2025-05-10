@@ -2,17 +2,15 @@ package com.pajeuhub.backend.infra.persistence;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import jakarta.persistence.*;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "hub_player")
-@Getter
-@Setter
 public class PlayerEntity {
     
     @Id

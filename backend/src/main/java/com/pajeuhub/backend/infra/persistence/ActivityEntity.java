@@ -2,16 +2,16 @@ package com.pajeuhub.backend.infra.persistence;
 
 import java.util.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 
 import jakarta.persistence.*;
 
-@Getter
-@Setter
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
