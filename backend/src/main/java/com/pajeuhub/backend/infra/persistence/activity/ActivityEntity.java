@@ -1,17 +1,20 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.activity;
 
 import java.util.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.pajeuhub.backend.infra.persistence.place.PlaceEntity;
+import com.pajeuhub.backend.infra.persistence.player.PlayerEntity;
+import com.pajeuhub.backend.infra.persistence.sport.SportEntity;
+
+import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 
 import jakarta.persistence.*;
 
-@Getter
-@Setter
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -38,7 +41,7 @@ public class ActivityEntity {
 
     @ManyToMany
     @JoinTable(
-        name = "activity_members",
+        name = "hub_activity_members",
         joinColumns = @JoinColumn(name = "activity_id"),
         inverseJoinColumns = @JoinColumn(name = "player_id")
     )

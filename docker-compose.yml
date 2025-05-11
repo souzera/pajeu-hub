@@ -13,6 +13,7 @@ services:
             - "5432:5432"
         volumes:
             - ./postgres_data:/var/lib/postgresql/data
+        restart: always
 
     test_database:
         image: oscarfonts/h2:latest
@@ -26,3 +27,4 @@ services:
             H2_OPTIONS: "-tcp -tcpAllowOthers -web -webAllowOthers"
         volumes:
             - ./h2_data:/data
+        restart: always

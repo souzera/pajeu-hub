@@ -1,25 +1,21 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.player;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import jakarta.persistence.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "hub_sports")
-public class SportEntity {
+@Table(name = "hub_player")
+public class PlayerEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-    private String description;
-    private boolean status;
+    private String contact;
 }

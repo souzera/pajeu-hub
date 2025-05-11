@@ -1,20 +1,18 @@
-package com.pajeuhub.backend.infra.persistence;
+package com.pajeuhub.backend.infra.persistence.place;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import jakarta.persistence.*;
 
 import com.pajeuhub.backend.core.enums.PlaceType;
 
-@Entity
-@Table(name = "hub_places")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Entity
+@Table(name = "hub_places")
 public class PlaceEntity {
     
     @Id
@@ -24,5 +22,7 @@ public class PlaceEntity {
     private String city;
     private String cep;
     private boolean status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "kind")
     private PlaceType kind;
 }
