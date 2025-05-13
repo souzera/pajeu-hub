@@ -1,6 +1,7 @@
 package com.pajeuhub.backend.infra.dto;
 
 import java.util.Date;
+import java.util.List;
 
 
 public record ActivityDTO(
@@ -10,5 +11,6 @@ public record ActivityDTO(
     PlaceDTO place,
     PlayerDTO creator,
     SportDTO sport,
-    PlayerDTO[] members
+    List<PlayerDTO> members,
+    boolean status
 ) {}

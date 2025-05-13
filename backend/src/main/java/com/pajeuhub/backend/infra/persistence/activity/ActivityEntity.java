@@ -1,6 +1,7 @@
 package com.pajeuhub.backend.infra.persistence.activity;
 
 import java.util.Date;
+import java.util.List;
 
 import com.pajeuhub.backend.infra.persistence.place.PlaceEntity;
 import com.pajeuhub.backend.infra.persistence.player.PlayerEntity;
@@ -26,6 +27,7 @@ public class ActivityEntity {
     private Long id;
     private String info;
     private Date date;
+    private boolean status;
 
     @ManyToOne
     @JoinColumn(name = "place_id", nullable = false)
@@ -45,7 +47,6 @@ public class ActivityEntity {
         joinColumns = @JoinColumn(name = "activity_id"),
         inverseJoinColumns = @JoinColumn(name = "player_id")
     )
-    private PlayerEntity[] members;
+    private List<PlayerEntity> members;
     
-    private boolean status;
 }
