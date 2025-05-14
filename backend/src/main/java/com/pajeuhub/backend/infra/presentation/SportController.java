@@ -47,4 +47,17 @@ public class SportController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> findSportById(
+        @PathVariable("id")
+        String id
+    ){
+        Sport sport = findSportCase.exeute(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Sport found successfully");
+        response.put("sport", sportMapper.toDTO(sport));
+
+        return ResponseEntity.ok(response);
+    }
 }
