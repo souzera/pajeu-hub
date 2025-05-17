@@ -63,4 +63,5 @@ public class ActivityController {
         response.put("activity", activityMapper.toDTO(activity));
 
         return ResponseEntity.ok(response);
+    }
 }
