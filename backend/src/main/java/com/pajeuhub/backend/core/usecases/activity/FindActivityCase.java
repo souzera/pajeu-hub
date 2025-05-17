@@ -4,6 +4,6 @@ import com.pajeuhub.backend.core.entities.Activity;
 
 public interface FindActivityCase {
     
-    public Activity execute(String id);
+    public Activity execute(Long id);
     
 }
