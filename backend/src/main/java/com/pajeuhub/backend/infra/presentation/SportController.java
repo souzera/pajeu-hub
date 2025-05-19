@@ -53,7 +53,7 @@ public class SportController {
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> findSportById(
         @PathVariable("id")
-        String id
+        Long id
     ){
         Sport sport = findSportCase.execute(id);
         Map<String, Object> response = new HashMap<>();

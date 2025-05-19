@@ -54,7 +54,7 @@ public class ActivityController {
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> findActivityById(
         @PathVariable("id")
-        String id
+        Long id
     ){
         Activity activity = findActivityCase.execute(id);
 

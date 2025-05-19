@@ -11,7 +11,7 @@ public class LoginCaseImpl implements LoginCase {
     }
 
     @Override
-    public boolean execute(String login, String password) {
+    public String execute(String login, String password) {
         return userGateway.login(login, password);
     }
     

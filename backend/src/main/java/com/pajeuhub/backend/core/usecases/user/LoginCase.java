@@ -7,7 +7,7 @@ public interface LoginCase {
      *
      * @param login the login of the user
      * @param password the password of the user
-     * @return a boolean indicating the result of the login attempt
+     * @return token jwt
      */
-    public boolean execute(String login, String password);
+    public String execute(String login, String password);
 }

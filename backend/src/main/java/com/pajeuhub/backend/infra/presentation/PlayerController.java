@@ -50,7 +50,7 @@ public class PlayerController {
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> findPlayerById(
         @PathVariable("id")
-        String id
+        Long id
     ){
         Player player = findPlayerCase.execute(id);
         

@@ -5,5 +5,5 @@ import com.pajeuhub.backend.core.entities.User;
 public interface UserGateway {
     
     User createUser(User user);
-    boolean login(String login, String password);
+    String login(String login, String password);
 }
