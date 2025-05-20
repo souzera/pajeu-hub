@@ -3,12 +3,12 @@ package com.pajeuhub.backend.infra.mapper;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
-import com.pajeuhub.backend.core.entities.Place;
-import com.pajeuhub.backend.infra.dto.PlaceDTO;
-import com.pajeuhub.backend.core.entities.Player;
-import com.pajeuhub.backend.infra.dto.PlayerDTO;
-import com.pajeuhub.backend.core.entities.Sport;
-import com.pajeuhub.backend.infra.dto.SportDTO;
+import com.pajeuhub.backend.core.entities.*;
+import com.pajeuhub.backend.infra.dto.*;
+
+import com.pajeuhub.backend.infra.persistence.player.*;
+import com.pajeuhub.backend.infra.persistence.place.*;
+import com.pajeuhub.backend.infra.persistence.sport.*;
 
 import com.pajeuhub.backend.core.entities.Activity;
 import com.pajeuhub.backend.infra.dto.ActivityDTO;
@@ -73,5 +73,32 @@ public class ActivityMapper {
         );
 
         return new Activity(activityEntity.getId(), activityEntity.getInfo(), activityEntity.getDate(), place, creator, sport, members, activityEntity.isStatus());
+    }
+
+    public ActivityEntity toEntity(Activity activity){
+        SportEntity sport = new SportMapper().toEntity(activity.sport());
+        PlaceEntity place = new PlaceMapper().toEntity(activity.place());
+        PlayerEntity creator = new PlayerMapper().toEntity(activity.creator());
+        List<PlayerEntity> members = new java.util.ArrayList<>();
+        activity.members().forEach(
+            player -> {
+                members.add(new PlayerMapper().toEntity(player));
+            }
+        );
+
+        return new ActivityEntity(activity.id(), activity.info(), activity.date(), activity.status(), place, creator, sport, members);
+    }
+
+    public ActivityEntity toEntity(ActivityDTO activityDTO){
+        SportEntity sport = new SportMapper().toEntity(activityDTO.sport());
+        PlaceEntity place = new PlaceMapper().toEntity(activityDTO.place());
+        PlayerEntity creator = new PlayerMapper().toEntity(activityDTO.creator());
+        List<PlayerEntity> members = new java.util.ArrayList<>();
+        activityDTO.members().forEach(
+            playerDTO -> {
+                members.add(new PlayerMapper().toEntity(playerDTO));
+            }
+        );
+        return new ActivityEntity(activityDTO.id(), activityDTO.info(), activityDTO.date(), activityDTO.status(), place, creator, sport, members);
     }
 }

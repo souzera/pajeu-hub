@@ -4,6 +4,6 @@ import com.pajeuhub.backend.core.entities.Place;
 
 public interface FindPlaceCase {
     
-    public Place execute(String id);
+    public Place execute(Long id);
     
 }

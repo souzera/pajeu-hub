@@ -1,9 +1,9 @@
 package com.pajeuhub.backend.core.gateway;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import com.pajeuhub.backend.core.entities.User;
 
 public interface UserGateway {
     
     User createUser(User user);
-    boolean login(String login, String password);
+    String login(String login, String password);
 }
