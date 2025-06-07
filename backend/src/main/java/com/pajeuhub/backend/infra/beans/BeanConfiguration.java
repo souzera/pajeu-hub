@@ -21,11 +21,20 @@ public class BeanConfiguration {
         return new CreateActivityCaseImpl(activityGateway);
     }
 
+    @Bean FindActivityCase findActivityCase(ActivityGateway activityGateway) {
+        return new FindActivityCaseImpl(activityGateway);
+    }
+
     // PLACE
 
     @Bean
     public CreatePlaceCase createPlaceCase(PlaceGateway placeGateway){
         return new CreatePlaceCaseImpl(placeGateway);
+    }
+
+    @Bean
+    public FindPlaceCase findPlaceCase(PlaceGateway placeGateway) {
+        return new FindPlaceCaseImpl(placeGateway);
     }
 
     // SPORT
@@ -35,6 +44,11 @@ public class BeanConfiguration {
         return new CreateSportCaseImpl(sportGateway);
     }
 
+    @Bean
+    public FindSportCase findSportCase(SportGateway sportGateway) {
+        return new FindSportCaseImpl(sportGateway);
+    }
+
     // PLAYER
     
     @Bean
@@ -42,10 +56,20 @@ public class BeanConfiguration {
         return new CreatePlayerCaseImpl(playerGateway);
     }
 
+    @Bean
+    public FindPlayerCase findPlayerCase(PlayerGateway playerGateway) {
+        return new FindPlayerCaseImpl(playerGateway);
+    }
+
     // USER
     
     @Bean
     public CreateUserCase createUserCase(UserGateway userGateway) {
         return new CreateUserCaseImpl(userGateway);
+    }
+
+    @Bean
+    public LoginCase loginCase(UserGateway userGateway) {
+        return new LoginCaseImpl(userGateway);
     }
 }
