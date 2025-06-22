@@ -25,12 +25,12 @@ public class PlayerController {
     private final FindPlayerCase findPlayerCase;
 
     public PlayerController(
-        CreatePlayerCase createPlayeCase,
+        CreatePlayerCase createPlayerCase,
         FindPlayerCase findPlayerCase
     ){
         this.playerMapper = new PlayerMapper();
 
-        this.createPlayerCase = createPlayeCase;
+        this.createPlayerCase = createPlayerCase;
         this.findPlayerCase = findPlayerCase;
     }
 
