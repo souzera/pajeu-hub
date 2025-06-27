@@ -7,19 +7,23 @@ import com.pajeuhub.backend.core.gateway.UserGateway;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
 import com.pajeuhub.backend.infra.persistence.user.UserRepository;
+import com.pajeuhub.backend.infra.service.TokenService;
 
 @Component  
 public class UserRepositoryGateway implements UserGateway{
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+     private final TokenService tokenService;
 
     public UserRepositoryGateway(
         UserMapper userMapper,
-        UserRepository userRepository
+        UserRepository userRepository,
+        TokenService tokenService
     ) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.tokenService = tokenService;
     }
 
     @Override
@@ -34,8 +38,11 @@ public class UserRepositoryGateway implements UserGateway{
 
     @Override
     public String login(String login, String password) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
+
+        UserEntity userEntity = userRepository.findByLogin(login);
+        System.out.println("UserEntity: " + userEntity.getLogin());
+
+        return tokenService.generateToken(userMapper.toDomain(userEntity).login() + "" + userMapper.toDomain(userEntity).password());
     }
     
 }

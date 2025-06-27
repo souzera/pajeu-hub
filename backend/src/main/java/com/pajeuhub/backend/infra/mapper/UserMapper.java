@@ -3,6 +3,7 @@ package com.pajeuhub.backend.infra.mapper;
 import org.springframework.stereotype.Component;
 
 import com.pajeuhub.backend.core.entities.User;
+import com.pajeuhub.backend.infra.dto.RegisterDTO;
 import com.pajeuhub.backend.infra.dto.UserDTO;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
 
@@ -24,6 +25,14 @@ public class UserMapper {
     public User toDomain(UserEntity userEntity){
         return new User(userEntity.getId(), userEntity.getLogin(), userEntity.getPassword());
     }
+    
+    public User toDomain(RegisterDTO registerDTO) {
+        return new User(null, registerDTO.email(), registerDTO.password());
+    }
+
+    public User toDomain(String email, String password) {
+        return new User(null, email, password);
+    }
 
     public UserEntity toEntity(User user){
         return new UserEntity(user.id(), user.login(), user.password());
@@ -32,4 +41,5 @@ public class UserMapper {
     public UserEntity toEntity(UserDTO userDTO){
         return new UserEntity(userDTO.id(), userDTO.login(), userDTO.password());
     }
+
 }
