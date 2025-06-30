@@ -17,6 +17,7 @@ import com.pajeuhub.backend.infra.dto.RegisterDTO;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
 
 import com.pajeuhub.backend.infra.service.TokenService;
+import com.pajeuhub.backend.infra.validation.UserValidation;
 
 @RestController
 public class UserController {
@@ -39,12 +40,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(
+    public ResponseEntity<Map<String, String>> login(
         @RequestBody
         LoginDTO userDto
     ){
+        if (!(UserValidation.loginValidation(userDto))){
+            return ResponseEntity.badRequest().body(Map.of("message", "Invalid login data"));
+        }
         User user = userMapper.toDomain(userDto);
-        return loginCase.execute(user.login(), user.password());
+        return ResponseEntity.ok(loginCase.execute(user.login(), user.password()));
     }
 
     @PostMapping("/register")
@@ -52,14 +56,8 @@ public class UserController {
         @RequestBody
         RegisterDTO userDTO
     ){
-        // TODO: validate reguest method
-
-        if (userDTO.password().equals(userDTO.confirmPassword())){
-            return ResponseEntity.badRequest().body(Map.of("message", "Passwords do not match"));
-        };
-
-        if (userDTO.email() == null || userDTO.password() == null || userDTO.confirmPassword() == null) {
-            return ResponseEntity.badRequest().body(Map.of("message", "Email and password are required"));
+        if (!(UserValidation.registerValidation(userDTO))){
+            return ResponseEntity.badRequest().body(Map.of("message", "Invalid registration data"));
         }
 
         // verify if user already exists

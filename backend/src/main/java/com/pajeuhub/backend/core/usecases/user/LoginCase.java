@@ -1,5 +1,7 @@
 package com.pajeuhub.backend.core.usecases.user;
 
+import java.util.Map;
+
 public interface LoginCase {
     
     /**
@@ -9,5 +11,5 @@ public interface LoginCase {
      * @param password the password of the user
      * @return token jwt
      */
-    public String execute(String login, String password);
+    public Map<String, String> execute(String login, String password);
 }
