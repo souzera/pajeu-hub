@@ -2,6 +2,7 @@ package com.pajeuhub.backend.infra.validation;
 
 import com.pajeuhub.backend.infra.dto.LoginDTO;
 import com.pajeuhub.backend.infra.dto.RegisterDTO;
+import com.pajeuhub.backend.infra.dto.UserDTO;
 
 public class UserValidation {
     
@@ -11,11 +12,11 @@ public class UserValidation {
             return false;
         }
 
-        if (loginDTO.email() == null || loginDTO.password() == null) {
+        if (loginDTO.login() == null || loginDTO.password() == null) {
             return false;
         }
 
-        if (loginDTO.email().isEmpty() || loginDTO.password().isEmpty()) {
+        if (loginDTO.login().isEmpty() || loginDTO.password().isEmpty()) {
             return false;
         }
 
@@ -27,11 +28,11 @@ public class UserValidation {
             return false;
         }
 
-        if (registerDTO.email() == null || registerDTO.password() == null || registerDTO.confirmPassword() == null) {
+        if (registerDTO.login() == null || registerDTO.password() == null || registerDTO.confirmPassword() == null) {
             return false;
         }
 
-        if (registerDTO.email().isEmpty() || registerDTO.password().isEmpty() || registerDTO.confirmPassword().isEmpty()) {
+        if (registerDTO.login().isEmpty() || registerDTO.password().isEmpty() || registerDTO.confirmPassword().isEmpty()) {
             return false;
         }
 

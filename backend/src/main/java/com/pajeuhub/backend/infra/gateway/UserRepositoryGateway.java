@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 
 import com.pajeuhub.backend.core.entities.User;
+import com.pajeuhub.backend.core.enums.UserRole;
 import com.pajeuhub.backend.core.gateway.UserGateway;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
@@ -38,7 +39,8 @@ public class UserRepositoryGateway implements UserGateway{
         User userWithEncryptedPassword = new User(
             null,
             user.login(),
-            cryptoService.hash(user.password())
+            cryptoService.hash(user.password()),
+            UserRole.USER
         );
 
         UserEntity userEntity = userMapper.toEntity(userWithEncryptedPassword);

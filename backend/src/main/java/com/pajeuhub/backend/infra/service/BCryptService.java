@@ -3,7 +3,6 @@ package com.pajeuhub.backend.infra.service;
 import org.springframework.stereotype.Service;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
-// org.springframework.security.crypto.bcrypt.BCrypt
 
 @Service
 public class BCryptService {

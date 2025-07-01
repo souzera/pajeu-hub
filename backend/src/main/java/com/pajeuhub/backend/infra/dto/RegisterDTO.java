@@ -1,7 +1,7 @@
 package com.pajeuhub.backend.infra.dto;
 
 public record RegisterDTO(
-    String email,
+    String login,
     String password,
     String confirmPassword
 ) {    
