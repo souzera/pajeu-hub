@@ -2,6 +2,8 @@ package com.pajeuhub.backend.infra.gateway;
 
 import java.util.Map;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Component;
 
 import com.pajeuhub.backend.core.entities.User;
@@ -10,7 +12,6 @@ import com.pajeuhub.backend.core.gateway.UserGateway;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
 import com.pajeuhub.backend.infra.persistence.user.UserRepository;
-import com.pajeuhub.backend.infra.service.CryptService;
 import com.pajeuhub.backend.infra.service.TokenService;
 
 @Component  
@@ -19,18 +20,17 @@ public class UserRepositoryGateway implements UserGateway{
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final TokenService tokenService;
-    private final CryptService cryptoService;
+
+    private final AuthenticationManager authenticationManager;
 
     public UserRepositoryGateway(
         UserMapper userMapper,
         UserRepository userRepository,
-        TokenService tokenService,
-        CryptService cryptoService
+        TokenService tokenService
     ) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.tokenService = tokenService;
-        this.cryptoService = cryptoService;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class UserRepositoryGateway implements UserGateway{
         User userWithEncryptedPassword = new User(
             null,
             user.login(),
-            cryptoService.hash(user.password()),
+            user.password(),
             UserRole.USER
         );
 
@@ -52,6 +52,10 @@ public class UserRepositoryGateway implements UserGateway{
 
     @Override
     public Map<String, String> login(String login, String password) {
+
+        var user = new UsernamePasswordAuthenticationToken(login, password);
+
+        var auth = authenticationManager.authenticate(user);
 
         UserEntity userEntity = userRepository.findByLogin(login);
         System.out.println("UserEntity: " + userEntity.getLogin());

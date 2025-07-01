@@ -34,8 +34,7 @@ public class UserController {
     public UserController(
         CreateUserCase createUserCase,
         LoginCase loginCase,
-        TokenService tokenService,
-        CryptService cryptService
+        TokenService tokenService
     ){
         this.userMapper = new UserMapper();
 
@@ -46,15 +45,9 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(
         @RequestBody
-        LoginDTO loginDTO
+        LoginDTO data
     ){
-
-        if (!(UserValidation.loginValidation(loginDTO))){
-            return ResponseEntity.badRequest().body(Map.of("message", "Invalid login data"));
-        }
-
-        User user = userMapper.toDomain(new UserDTO(null, loginDTO.login(), loginDTO.password(), null));
-        return ResponseEntity.ok(loginCase.execute(user.login(), user.password()));
+        var user = loginCase.execute(data.login(), data.password());
     }
 
     @PostMapping("/register")
