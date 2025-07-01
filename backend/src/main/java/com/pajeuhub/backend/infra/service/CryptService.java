@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Service
-public class BCryptService {
+public class CryptService {
     
     public String hash(String password){
         return BCrypt.hashpw(password, BCrypt.gensalt());

@@ -2,7 +2,6 @@ package com.pajeuhub.backend.infra.validation;
 
 import com.pajeuhub.backend.infra.dto.LoginDTO;
 import com.pajeuhub.backend.infra.dto.RegisterDTO;
-import com.pajeuhub.backend.infra.dto.UserDTO;
 
 public class UserValidation {
     

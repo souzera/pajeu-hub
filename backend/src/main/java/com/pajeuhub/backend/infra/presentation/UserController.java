@@ -16,9 +16,8 @@ import com.pajeuhub.backend.core.usecases.user.LoginCase;
 import com.pajeuhub.backend.infra.dto.LoginDTO;
 import com.pajeuhub.backend.infra.dto.RegisterDTO;
 import com.pajeuhub.backend.infra.dto.UserDTO;
-//import com.pajeuhub.backend.infra.dto.UserDTO;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
-
+import com.pajeuhub.backend.infra.service.CryptService;
 import com.pajeuhub.backend.infra.service.TokenService;
 import com.pajeuhub.backend.infra.validation.UserValidation;
 
@@ -35,7 +34,8 @@ public class UserController {
     public UserController(
         CreateUserCase createUserCase,
         LoginCase loginCase,
-        TokenService tokenService
+        TokenService tokenService,
+        CryptService cryptService
     ){
         this.userMapper = new UserMapper();
 

@@ -10,7 +10,7 @@ import com.pajeuhub.backend.core.gateway.UserGateway;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
 import com.pajeuhub.backend.infra.persistence.user.UserRepository;
-import com.pajeuhub.backend.infra.service.BCryptService;
+import com.pajeuhub.backend.infra.service.CryptService;
 import com.pajeuhub.backend.infra.service.TokenService;
 
 @Component  
@@ -19,13 +19,13 @@ public class UserRepositoryGateway implements UserGateway{
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final TokenService tokenService;
-    private final BCryptService cryptoService;
+    private final CryptService cryptoService;
 
     public UserRepositoryGateway(
         UserMapper userMapper,
         UserRepository userRepository,
         TokenService tokenService,
-        BCryptService cryptoService
+        CryptService cryptoService
     ) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
