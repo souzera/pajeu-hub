@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pajeuhub.backend.core.entities.User;
@@ -17,19 +18,19 @@ import com.pajeuhub.backend.infra.dto.LoginDTO;
 import com.pajeuhub.backend.infra.dto.RegisterDTO;
 import com.pajeuhub.backend.infra.dto.UserDTO;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
-import com.pajeuhub.backend.infra.service.CryptService;
 import com.pajeuhub.backend.infra.service.TokenService;
 import com.pajeuhub.backend.infra.validation.UserValidation;
 
 @RestController
+@RequestMapping("auth")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-    
 
     private final UserMapper userMapper;
 
     private final CreateUserCase createUserCase;
     private final LoginCase loginCase;
+
 
     public UserController(
         CreateUserCase createUserCase,
@@ -44,10 +45,10 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(
-        @RequestBody
+        @RequestBody 
         LoginDTO data
     ){
-        var user = loginCase.execute(data.login(), data.password());
+        return ResponseEntity.ok(loginCase.execute(data.login(), data.password()));
     }
 
     @PostMapping("/register")

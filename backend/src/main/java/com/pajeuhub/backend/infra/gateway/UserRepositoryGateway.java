@@ -26,11 +26,13 @@ public class UserRepositoryGateway implements UserGateway{
     public UserRepositoryGateway(
         UserMapper userMapper,
         UserRepository userRepository,
-        TokenService tokenService
+        TokenService tokenService,
+        AuthenticationManager authenticationManager
     ) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.tokenService = tokenService;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -57,10 +59,9 @@ public class UserRepositoryGateway implements UserGateway{
 
         var auth = authenticationManager.authenticate(user);
 
-        UserEntity userEntity = userRepository.findByLogin(login);
-        System.out.println("UserEntity: " + userEntity.getLogin());
+        var token = tokenService.generateToken(auth.getPrincipal().toString());
 
-        return Map.of("token", tokenService.generateToken(password));
+        return Map.of("token", token);
     }
     
 }
