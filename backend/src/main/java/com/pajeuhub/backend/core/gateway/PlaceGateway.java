@@ -9,4 +9,6 @@ public interface PlaceGateway {
     List<Place> listPlaces();
     Place createPlace(Place place);
     Place findPlaceById(Long id);
+    Place updatePlace(Place place);
+    void deletePlace(Long id);
 }   

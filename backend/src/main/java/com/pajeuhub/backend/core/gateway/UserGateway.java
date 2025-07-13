@@ -8,4 +8,6 @@ public interface UserGateway {
     
     User createUser(User user);
     Map<String, Object> login(String login, String password);
+
+    void deleteUser(Long id);
 }
