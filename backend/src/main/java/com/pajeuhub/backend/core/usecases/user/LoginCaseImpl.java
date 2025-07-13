@@ -1,5 +1,7 @@
 package com.pajeuhub.backend.core.usecases.user;
 
+import java.util.Map;
+
 import com.pajeuhub.backend.core.gateway.UserGateway;
 
 public class LoginCaseImpl implements LoginCase {
@@ -11,7 +13,7 @@ public class LoginCaseImpl implements LoginCase {
     }
 
     @Override
-    public String execute(String login, String password) {
+    public Map<String, Object> execute(String login, String password) {
         return userGateway.login(login, password);
     }
     

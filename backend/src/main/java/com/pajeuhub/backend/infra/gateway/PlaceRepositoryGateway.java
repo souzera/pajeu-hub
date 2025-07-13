@@ -51,6 +51,18 @@ public class PlaceRepositoryGateway implements PlaceGateway{
                             .toList();
     }
 
+    @Override
+    public Place updatePlace(Place place) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updatePlace'");
+    }
+
+    @Override
+    public void deletePlace(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deletePlace'");
+    }
+
     
     
 }

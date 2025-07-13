@@ -83,4 +83,9 @@ public class BeanConfiguration {
     public LoginCase loginCase(UserGateway userGateway) {
         return new LoginCaseImpl(userGateway);
     }
+
+    @Bean
+    public DeleteUserCase deleteUserCase(UserGateway userGateway){
+        return new DeleteUserCaseImpl(userGateway);
+    }
 }

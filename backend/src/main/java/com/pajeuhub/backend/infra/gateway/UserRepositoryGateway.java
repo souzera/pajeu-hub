@@ -1,8 +1,15 @@
 package com.pajeuhub.backend.infra.gateway;
 
+import java.util.Map;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.pajeuhub.backend.core.entities.User;
+import com.pajeuhub.backend.core.enums.UserRole;
 import com.pajeuhub.backend.core.gateway.UserGateway;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
@@ -14,35 +21,57 @@ public class UserRepositoryGateway implements UserGateway{
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
-     private final TokenService tokenService;
+    private final TokenService tokenService;
+
+    private AuthenticationManager authenticationManager;
 
     public UserRepositoryGateway(
         UserMapper userMapper,
         UserRepository userRepository,
-        TokenService tokenService
+        TokenService tokenService,
+        AuthenticationManager authenticationManager
     ) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
         this.tokenService = tokenService;
+
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
     public User createUser(User user) {
-        UserEntity userEntity = userMapper.toEntity(user);
 
-        // TOKEN AND CRYPT PASSWORD
+        String encryptedPassword = new BCryptPasswordEncoder().encode(user.password());
+        User userWithEncryptedPassword = new User(
+            null,
+            user.login(),
+            encryptedPassword,
+            UserRole.USER
+        );
+
+        UserEntity userEntity = userMapper.toEntity(userWithEncryptedPassword);
+        
         UserEntity savedUserEntity = userRepository.save(userEntity);
 
         return userMapper.toDomain(savedUserEntity);
     }
 
     @Override
-    public String login(String login, String password) {
+    public Map<String, Object> login(String login, String password) {
+        
+        try{
+            var user = new UsernamePasswordAuthenticationToken(login, password);
+            var auth = this.authenticationManager.authenticate(user);
+            var token = this.tokenService.generateToken(auth.getPrincipal().toString());
+            return Map.of("token", token);
+        } catch (AuthenticationException exception){
+            return Map.of("error", exception.toString());
+        }
+    }
 
-        UserEntity userEntity = userRepository.findByLogin(login);
-        System.out.println("UserEntity: " + userEntity.getLogin());
-
-        return tokenService.generateToken(userMapper.toDomain(userEntity).login() + "" + userMapper.toDomain(userEntity).password());
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
     
 }

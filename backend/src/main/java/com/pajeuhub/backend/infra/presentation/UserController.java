@@ -4,65 +4,78 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pajeuhub.backend.core.entities.User;
+import com.pajeuhub.backend.core.enums.UserRole;
 import com.pajeuhub.backend.core.usecases.user.CreateUserCase;
+import com.pajeuhub.backend.core.usecases.user.DeleteUserCase;
 import com.pajeuhub.backend.core.usecases.user.LoginCase;
 import com.pajeuhub.backend.infra.dto.LoginDTO;
 import com.pajeuhub.backend.infra.dto.RegisterDTO;
-//import com.pajeuhub.backend.infra.dto.UserDTO;
+import com.pajeuhub.backend.infra.dto.UserDTO;
 import com.pajeuhub.backend.infra.mapper.UserMapper;
-
 import com.pajeuhub.backend.infra.service.TokenService;
+import com.pajeuhub.backend.infra.validation.UserValidation;
 
 @RestController
+@RequestMapping("auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-    
 
     private final UserMapper userMapper;
 
     private final CreateUserCase createUserCase;
     private final LoginCase loginCase;
+    private final DeleteUserCase deleteUserCase;
+
+    private final UserValidation userValidation;
 
     public UserController(
         CreateUserCase createUserCase,
         LoginCase loginCase,
-        TokenService tokenService
+        DeleteUserCase deleteUserCase,
+        TokenService tokenService,
+        UserValidation userValidation
     ){
         this.userMapper = new UserMapper();
 
         this.createUserCase = createUserCase;
         this.loginCase = loginCase;
+        this.deleteUserCase = deleteUserCase;
+
+        this.userValidation = userValidation;
     }
 
     @PostMapping("/login")
-    public String login(
-        @RequestBody
-        LoginDTO userDto
+    public ResponseEntity<Map<String, Object>> login(
+        @RequestBody 
+        LoginDTO data
     ){
-        User user = userMapper.toDomain(userDto);
-        return loginCase.execute(user.login(), user.password());
+        return ResponseEntity.ok(loginCase.execute(data.login(), data.password()));
     }
 
     @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> createUser(
         @RequestBody
-        RegisterDTO userDTO
+        RegisterDTO registerDTO
     ){
-        // TODO: validate reguest method
-
-        if (userDTO.password().equals(userDTO.confirmPassword())){
-            return ResponseEntity.badRequest().body(Map.of("message", "Passwords do not match"));
-        };
-
-        if (userDTO.email() == null || userDTO.password() == null || userDTO.confirmPassword() == null) {
-            return ResponseEntity.badRequest().body(Map.of("message", "Email and password are required"));
+        if (userValidation.registerValidation(registerDTO).get("error") != null) {
+            return ResponseEntity.badRequest().body(userValidation.registerValidation(registerDTO));
         }
 
-        // verify if user already exists
+        UserDTO userDTO = new UserDTO(
+            null,
+            registerDTO.login(),
+            registerDTO.password(),
+            UserRole.USER.name()
+        );
 
         User user = createUserCase.execute(userMapper.toDomain(userDTO));
 
@@ -71,6 +84,18 @@ public class UserController {
         response.put("user", userMapper.toDTO(user));
 
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Map<String, Object>> deleteUser(
+        @RequestParam Long id
+    ){
+        try{
+            deleteUserCase.execute(id);
+            return ResponseEntity.ok(Map.of("message", "User deleted successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
     }
 
     
