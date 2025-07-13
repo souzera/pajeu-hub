@@ -2,7 +2,6 @@ package com.pajeuhub.backend.infra.gateway;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -16,7 +15,6 @@ import com.pajeuhub.backend.infra.mapper.UserMapper;
 import com.pajeuhub.backend.infra.persistence.user.UserEntity;
 import com.pajeuhub.backend.infra.persistence.user.UserRepository;
 import com.pajeuhub.backend.infra.service.TokenService;
-import com.pajeuhub.backend.infra.validation.UserValidation;
 
 @Component  
 public class UserRepositoryGateway implements UserGateway{
@@ -60,16 +58,20 @@ public class UserRepositoryGateway implements UserGateway{
 
     @Override
     public Map<String, Object> login(String login, String password) {
-
-        var user = new UsernamePasswordAuthenticationToken(login, password);
-
+        
         try{
+            var user = new UsernamePasswordAuthenticationToken(login, password);
             var auth = this.authenticationManager.authenticate(user);
             var token = this.tokenService.generateToken(auth.getPrincipal().toString());
             return Map.of("token", token);
         } catch (AuthenticationException exception){
             return Map.of("error", exception.toString());
         }
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
     
 }

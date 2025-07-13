@@ -44,6 +44,24 @@ public class SportRepositoryGateway implements SportGateway{
         }
     }
 
+    @Override
+    public Iterable<Sport> findAllSports() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAllSports'");
+    }
+
+    @Override
+    public Sport updateSport(Sport sport) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateSport'");
+    }
+
+    @Override
+    public void deleteSport(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteSport'");
+    }
+
     
     
 }

@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class NotFoundException extends RuntimeException {
 
-    public static Map notFoundException(){
+    public static Map<String, Object> notFoundException(){
         return Map.of("error", "not found exception");
     }
     

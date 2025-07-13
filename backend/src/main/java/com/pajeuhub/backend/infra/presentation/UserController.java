@@ -5,14 +5,17 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pajeuhub.backend.core.entities.User;
 import com.pajeuhub.backend.core.enums.UserRole;
 import com.pajeuhub.backend.core.usecases.user.CreateUserCase;
+import com.pajeuhub.backend.core.usecases.user.DeleteUserCase;
 import com.pajeuhub.backend.core.usecases.user.LoginCase;
 import com.pajeuhub.backend.infra.dto.LoginDTO;
 import com.pajeuhub.backend.infra.dto.RegisterDTO;
@@ -30,12 +33,14 @@ public class UserController {
 
     private final CreateUserCase createUserCase;
     private final LoginCase loginCase;
+    private final DeleteUserCase deleteUserCase;
 
     private final UserValidation userValidation;
 
     public UserController(
         CreateUserCase createUserCase,
         LoginCase loginCase,
+        DeleteUserCase deleteUserCase,
         TokenService tokenService,
         UserValidation userValidation
     ){
@@ -43,6 +48,8 @@ public class UserController {
 
         this.createUserCase = createUserCase;
         this.loginCase = loginCase;
+        this.deleteUserCase = deleteUserCase;
+
         this.userValidation = userValidation;
     }
 
@@ -77,6 +84,18 @@ public class UserController {
         response.put("user", userMapper.toDTO(user));
 
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Map<String, Object>> deleteUser(
+        @RequestParam Long id
+    ){
+        try{
+            deleteUserCase.execute(id);
+            return ResponseEntity.ok(Map.of("message", "User deleted successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
     }
 
     

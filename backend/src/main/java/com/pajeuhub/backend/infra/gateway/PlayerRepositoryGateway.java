@@ -35,5 +35,23 @@ public class PlayerRepositoryGateway implements PlayerGateway{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findPlayerById'");
     }
+
+    @Override
+    public Iterable<Player> findAllPlayers() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAllPlayers'");
+    }
+
+    @Override
+    public Player updatePlayer(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updatePlayer'");
+    }
+
+    @Override
+    public void deletePlayer(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deletePlayer'");
+    }
     
 }

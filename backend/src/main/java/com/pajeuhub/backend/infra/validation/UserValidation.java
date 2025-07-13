@@ -13,6 +13,8 @@ import com.pajeuhub.backend.infra.persistence.user.UserRepository;
 @Component
 public class UserValidation {
     
+    public static final String SUCESS_MESSAGE = "success validation";
+
     private final UserRepository userRepository;
 
     public UserValidation(
@@ -37,7 +39,7 @@ public class UserValidation {
         return true;
     }
 
-    public Map registerValidation(RegisterDTO registerDTO){
+    public Map<String, Object> registerValidation(RegisterDTO registerDTO){
         if (registerDTO == null) {
             return InvalidDataException.data();
         }
@@ -62,6 +64,6 @@ public class UserValidation {
             return UniqueViolationException.data(registerDTO.login());
         }
 
-        return Map.of("error", null);
+        return Map.of("sucess", SUCESS_MESSAGE);
     }
 }

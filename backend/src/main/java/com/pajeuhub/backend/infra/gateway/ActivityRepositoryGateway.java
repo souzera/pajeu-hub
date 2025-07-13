@@ -1,5 +1,7 @@
 package com.pajeuhub.backend.infra.gateway;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.pajeuhub.backend.core.entities.Activity;
@@ -34,6 +36,24 @@ public class ActivityRepositoryGateway implements ActivityGateway{
     public Activity findActivityById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findActivityById'");
+    }
+
+    @Override
+    public List<Activity> listActivities() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listActivities'");
+    }
+
+    @Override
+    public Activity updateActivity(Activity activity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateActivity'");
+    }
+
+    @Override
+    public void deleteActivity(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteActivity'");
     } 
     
 

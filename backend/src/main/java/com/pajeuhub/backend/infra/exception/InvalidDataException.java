@@ -4,15 +4,15 @@ import java.util.Map;
 
 public class InvalidDataException extends RuntimeException{
 
-    public static Map data(){
+    public static Map<String, Object> data(){
         return Map.of("error", "invalid data");
     }
 
-    public static Map data(String param){
+    public static Map<String, Object> data(String param){
         return Map.of("error", "param " + param + "invalid");
     }
 
-    public static Map dataWithCustomMessage(String message){
+    public static Map<String, Object> dataWithCustomMessage(String message){
         return Map.of("error", message);
     }
 

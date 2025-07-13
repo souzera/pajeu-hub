@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class UniqueViolationException extends RuntimeException{
 
-    public static Map data(){
+    public static Map<String, Object> data(){
         return Map.of("error", "unique violation exception");
     }
 
-    public static Map data(String param){
+    public static Map<String, Object> data(String param){
         return Map.of("error", "param " + param + " violated the unique value constraint");
     }
     
