@@ -28,5 +28,9 @@ jobs:
 
       - name: Build with Maven
         working-directory:  ./backend
-        run: echo "TODO:Maven Build"
+        run: mvn clean install --no-transfer-progress
 
+      - name: Run Tests
+        working-directory:  ./backend
+        run: mvn test --no-transfer-progress
+      
