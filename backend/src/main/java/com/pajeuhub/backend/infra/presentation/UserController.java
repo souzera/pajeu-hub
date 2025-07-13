@@ -31,16 +31,19 @@ public class UserController {
     private final CreateUserCase createUserCase;
     private final LoginCase loginCase;
 
+    private final UserValidation userValidation;
 
     public UserController(
         CreateUserCase createUserCase,
         LoginCase loginCase,
-        TokenService tokenService
+        TokenService tokenService,
+        UserValidation userValidation
     ){
         this.userMapper = new UserMapper();
 
         this.createUserCase = createUserCase;
         this.loginCase = loginCase;
+        this.userValidation = userValidation;
     }
 
     @PostMapping("/login")
@@ -56,8 +59,8 @@ public class UserController {
         @RequestBody
         RegisterDTO registerDTO
     ){
-        if (!(UserValidation.registerValidation(registerDTO))){
-            return ResponseEntity.badRequest().body(Map.of("message", "Invalid registration data"));
+        if (userValidation.registerValidation(registerDTO).get("error") != null) {
+            return ResponseEntity.badRequest().body(userValidation.registerValidation(registerDTO));
         }
 
         UserDTO userDTO = new UserDTO(

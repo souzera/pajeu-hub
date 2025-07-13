@@ -7,5 +7,5 @@ import com.pajeuhub.backend.core.entities.User;
 public interface UserGateway {
     
     User createUser(User user);
-    Map<String, String> login(String login, String password);
+    Map<String, Object> login(String login, String password);
 }
