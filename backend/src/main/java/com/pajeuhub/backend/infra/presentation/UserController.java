@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(
+    public ResponseEntity<Map<String, Object>> login(
         @RequestBody 
         LoginDTO data
     ){
