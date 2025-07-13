@@ -26,11 +26,20 @@ jobs:
           javac -version
           mvn -v
 
+      - name: Clean up old files
+        working-directory: ./backend
+        run: mvn clean --no-transfer-progress
+
       - name: Build with Maven
         working-directory:  ./backend
-        run: mvn clean install --no-transfer-progress
+        run: mvn package --no-transfer-progress
+
+      - name: Install Dependencies
+        working-directory:  ./backend
+        run: mvn install --no-transfer-progress
 
       - name: Run Tests
         working-directory:  ./backend
         run: mvn test --no-transfer-progress
+
       
