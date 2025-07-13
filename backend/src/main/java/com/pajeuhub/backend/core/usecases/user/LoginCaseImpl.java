@@ -13,7 +13,7 @@ public class LoginCaseImpl implements LoginCase {
     }
 
     @Override
-    public Map execute(String login, String password) {
+    public Map<String, Object> execute(String login, String password) {
         return userGateway.login(login, password);
     }
     

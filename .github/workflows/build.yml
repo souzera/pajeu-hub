@@ -32,7 +32,7 @@ jobs:
 
       - name: Build with Maven
         working-directory:  ./backend
-        run: mvn package --no-transfer-progress
+        run: mvn package
 
       - name: Install Dependencies
         working-directory:  ./backend
